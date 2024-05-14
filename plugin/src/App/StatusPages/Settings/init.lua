@@ -2,8 +2,8 @@ local Rojo = script:FindFirstAncestor("Rojo")
 local Plugin = Rojo.Plugin
 local Packages = Rojo.Packages
 
-local Roact = require(Packages.Roact)
 local Log = require(Packages.Log)
+local Roact = require(Packages.Roact)
 
 local Assets = require(Plugin.Assets)
 local Settings = require(Plugin.Settings)
@@ -11,9 +11,9 @@ local Theme = require(Plugin.App.Theme)
 
 local IconButton = require(Plugin.App.Components.IconButton)
 local ScrollingFrame = require(Plugin.App.Components.ScrollingFrame)
-local Tooltip = require(Plugin.App.Components.Tooltip)
-local TextInput = require(Plugin.App.Components.TextInput)
 local Setting = require(script.Setting)
+local TextInput = require(Plugin.App.Components.TextInput)
+local Tooltip = require(Plugin.App.Components.Tooltip)
 
 local e = Roact.createElement
 
@@ -158,6 +158,14 @@ function SettingsPage:render()
 					id = "playSounds",
 					name = "Play Sounds",
 					description = "Toggle sound effects",
+					transparency = self.props.transparency,
+					layoutOrder = layoutIncrement(),
+				}),
+
+				PlaySoundsOnChanges = e(Setting, {
+					id = "playSoundsOnChanges",
+					name = "Play Sounds on Changes",
+					description = "Play a sound effect when a change is detected",
 					transparency = self.props.transparency,
 					layoutOrder = layoutIncrement(),
 				}),

@@ -18,6 +18,7 @@ local defaultSettings = {
 	confirmationBehavior = "Initial",
 	largeChangesConfirmationThreshold = 5,
 	playSounds = true,
+	playSoundsOnChanges = false,
 	typecheckingEnabled = false,
 	logLevel = "Info",
 	timingLogsEnabled = false,

@@ -65,6 +65,7 @@ local Assets = {
 	},
 	Sounds = {
 		Notification = "rbxassetid://203785492",
+		Update = "rbxassetid://452267918"
 	},
 	StartSession = "",
 	SessionActive = "",

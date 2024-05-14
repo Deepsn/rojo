@@ -1,39 +1,39 @@
-local ChangeHistoryService = game:GetService("ChangeHistoryService")
-local Players = game:GetService("Players")
-local ServerStorage = game:GetService("ServerStorage")
-local RunService = game:GetService("RunService")
+local ChangeHistoryService = game:GetService('ChangeHistoryService')
+local Players = game:GetService('Players')
+local RunService = game:GetService('RunService')
+local ServerStorage = game:GetService('ServerStorage')
 
 local Rojo = script:FindFirstAncestor("Rojo")
 local Plugin = Rojo.Plugin
 local Packages = Rojo.Packages
 
-local Roact = require(Packages.Roact)
 local Log = require(Packages.Log)
+local Roact = require(Packages.Roact)
 
-local Assets = require(Plugin.Assets)
-local Version = require(Plugin.Version)
-local Config = require(Plugin.Config)
-local Settings = require(Plugin.Settings)
-local strict = require(Plugin.strict)
-local Dictionary = require(Plugin.Dictionary)
-local ServeSession = require(Plugin.ServeSession)
 local ApiContext = require(Plugin.ApiContext)
+local Assets = require(Plugin.Assets)
+local Config = require(Plugin.Config)
+local Dictionary = require(Plugin.Dictionary)
 local PatchSet = require(Plugin.PatchSet)
 local PatchTree = require(Plugin.PatchTree)
+local ServeSession = require(Plugin.ServeSession)
+local Settings = require(Plugin.Settings)
+local Theme = require(script.Theme)
+local Version = require(Plugin.Version)
+local ignorePlaceIds = require(Plugin.ignorePlaceIds)
 local preloadAssets = require(Plugin.preloadAssets)
 local soundPlayer = require(Plugin.soundPlayer)
-local ignorePlaceIds = require(Plugin.ignorePlaceIds)
-local Theme = require(script.Theme)
+local strict = require(Plugin.strict)
 
-local Page = require(script.Page)
 local Notifications = require(script.Notifications)
-local Tooltip = require(script.Components.Tooltip)
-local StudioPluginAction = require(script.Components.Studio.StudioPluginAction)
-local StudioToolbar = require(script.Components.Studio.StudioToolbar)
-local StudioToggleButton = require(script.Components.Studio.StudioToggleButton)
-local StudioPluginGui = require(script.Components.Studio.StudioPluginGui)
-local StudioPluginContext = require(script.Components.Studio.StudioPluginContext)
+local Page = require(script.Page)
 local StatusPages = require(script.StatusPages)
+local StudioPluginAction = require(script.Components.Studio.StudioPluginAction)
+local StudioPluginContext = require(script.Components.Studio.StudioPluginContext)
+local StudioPluginGui = require(script.Components.Studio.StudioPluginGui)
+local StudioToggleButton = require(script.Components.Studio.StudioToggleButton)
+local StudioToolbar = require(script.Components.Studio.StudioToolbar)
+local Tooltip = require(script.Components.Tooltip)
 
 local AppStatus = strict("AppStatus", {
 	NotConnected = "NotConnected",
@@ -471,6 +471,9 @@ function App:startSession()
 			-- considered to be part of the same change for human clarity
 			patch = PatchSet.assign(PatchSet.newEmpty(), old.patch, patch)
 			unapplied = PatchSet.assign(PatchSet.newEmpty(), old.unapplied, unapplied)
+		elseif Settings:get("playSoundsOnChanges") then
+			-- Play sound on new patch
+			self.props.soundPlayer:play(Assets.Sounds.Update)
 		end
 
 		self:setState({
