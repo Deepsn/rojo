@@ -471,9 +471,16 @@ function App:startSession()
 			-- considered to be part of the same change for human clarity
 			patch = PatchSet.assign(PatchSet.newEmpty(), old.patch, patch)
 			unapplied = PatchSet.assign(PatchSet.newEmpty(), old.unapplied, unapplied)
-		elseif Settings:get("playSoundsOnChanges") then
-			-- Play sound on new patch
-			self.props.soundPlayer:play(Assets.Sounds.Update)
+		else
+			if Settings:get("playSoundsOnChanges") then
+				-- Play sound on new patch
+				self.props.soundPlayer:play(Assets.Sounds.Update)
+			end
+
+			if Settings:get("notificationOnChanges") then
+				-- Show notification on new patch
+				self:addNotification("Changes detected", 2)
+			end
 		end
 
 		self:setState({

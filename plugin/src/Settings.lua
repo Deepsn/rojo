@@ -13,6 +13,7 @@ local defaultSettings = {
 	openScriptsExternally = false,
 	twoWaySync = false,
 	showNotifications = true,
+	notificationOnChanges = false,
 	syncReminder = true,
 	autoConnectPlaytestServer = false,
 	confirmationBehavior = "Initial",

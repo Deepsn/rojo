@@ -170,6 +170,14 @@ function SettingsPage:render()
 					layoutOrder = layoutIncrement(),
 				}),
 
+				NotificationOnChanges = e(Setting, {
+					id = "notificationOnChanges",
+					name = "Notification on Changes",
+					description = "Show a notification when a change is detected",
+					transparency = self.props.transparency,
+					layoutOrder = layoutIncrement(),
+				}),
+
 				AutoConnectPlaytestServer = e(Setting, {
 					id = "autoConnectPlaytestServer",
 					name = "Auto Connect Playtest Server",
